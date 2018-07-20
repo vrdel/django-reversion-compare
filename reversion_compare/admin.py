@@ -210,7 +210,7 @@ class BaseCompareVersionAdmin(CompareMixin, VersionAdmin):
 
         extra_context = extra_context or {}
         context.update(extra_context)
-        return render(request, self.compare_template or self._get_template_list("compare.html"),
+        return render(request, self.compare_template or self._reversion_get_template_list("compare.html"),
                       context)
 
 
@@ -233,7 +233,7 @@ if hasattr(settings, "ADD_REVERSION_ADMIN") and settings.ADD_REVERSION_ADMIN:
 
     admin.site.register(Revision, RevisionAdmin)
 
-    
+
     class VersionAdmin(admin.ModelAdmin):
         list_display = ("object_repr", "revision", "object_id", "content_type", "format",)
         list_display_links = ("object_repr", "object_id")
